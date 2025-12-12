@@ -9,8 +9,8 @@
 .main-page-recommanded {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     width: 70%;
     border: 1px solid red;
-    row-gap: 5rem;
+    gap: 30px;
 }
