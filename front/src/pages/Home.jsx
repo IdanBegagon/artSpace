@@ -17,19 +17,54 @@ function Home() {
       summery: "Game of Thrones (GOT) book series (A Song of Ice and Fire) summarizes a massive fantasy epic where noble families in the fictional continents of Westeros & Essos battle for the Iron Throne, while an ancient supernatural threat from beyond the Wall awakens; it's defined by complex characters, political intrigue, moral ambiguity, and shocking betrayals, following storylines like Starks in the North, Lannisters in the South, and exiled Daenerys Targaryen's rise with dragons, all amidst impending winter."
     },
     {
-          id: 3,
-      title: "G.O.T",
-      author: "George RR Martin",
-      summery: "Game of Thrones (GOT) book series (A Song of Ice and Fire) summarizes a massive fantasy epic where noble families in the fictional continents of Westeros & Essos battle for the Iron Throne, while an ancient supernatural threat from beyond the Wall awakens; it's defined by complex characters, political intrigue, moral ambiguity, and shocking betrayals, following storylines like Starks in the North, Lannisters in the South, and exiled Daenerys Targaryen's rise with dragons, all amidst impending winter."
+      id: 3,
+      title: "1984",
+      author: "George Orwell",
+      summery: "1984 is a dystopian novel about Winston Smith, a low-ranking Party member in totalitarian Oceania, who rebels against the omnipresent state led by Big Brother by secretly keeping a diary and starting a forbidden love affair with Julia, only to be captured, tortured by O'Brien, and ultimately brainwashed in Room 101, learning to love Big Brother and losing his individuality, serving as a stark warning against totalitarianism and loss of freedom. "
     },
+        {
+      id: 3,
+      title: "1984",
+      author: "George Orwell",
+      summery: "1984 is a dystopian novel about Winston Smith, a low-ranking Party member in totalitarian Oceania, who rebels against the omnipresent state led by Big Brother by secretly keeping a diary and starting a forbidden love affair with Julia, only to be captured, tortured by O'Brien, and ultimately brainwashed in Room 101, learning to love Big Brother and losing his individuality, serving as a stark warning against totalitarianism and loss of freedom. "
+    },
+        {
+      id: 3,
+      title: "1984",
+      author: "George Orwell",
+      summery: "1984 is a dystopian novel about Winston Smith, a low-ranking Party member in totalitarian Oceania, who rebels against the omnipresent state led by Big Brother by secretly keeping a diary and starting a forbidden love affair with Julia, only to be captured, tortured by O'Brien, and ultimately brainwashed in Room 101, learning to love Big Brother and losing his individuality, serving as a stark warning against totalitarianism and loss of freedom. "
+    },
+        {
+      id: 3,
+      title: "1984",
+      author: "George Orwell",
+      summery: "1984 is a dystopian novel about Winston Smith, a low-ranking Party member in totalitarian Oceania, who rebels against the omnipresent state led by Big Brother by secretly keeping a diary and starting a forbidden love affair with Julia, only to be captured, tortured by O'Brien, and ultimately brainwashed in Room 101, learning to love Big Brother and losing his individuality, serving as a stark warning against totalitarianism and loss of freedom. "
+    },
+        {
+      id: 3,
+      title: "1984",
+      author: "George Orwell",
+      summery: "1984 is a dystopian novel about Winston Smith, a low-ranking Party member in totalitarian Oceania, who rebels against the omnipresent state led by Big Brother by secretly keeping a diary and starting a forbidden love affair with Julia, only to be captured, tortured by O'Brien, and ultimately brainwashed in Room 101, learning to love Big Brother and losing his individuality, serving as a stark warning against totalitarianism and loss of freedom. "
+    },
+        {
+      id: 3,
+      title: "1984",
+      author: "George Orwell",
+      summery: "1984 is a dystopian novel about Winston Smith, a low-ranking Party member in totalitarian Oceania, who rebels against the omnipresent state led by Big Brother by secretly keeping a diary and starting a forbidden love affair with Julia, only to be captured, tortured by O'Brien, and ultimately brainwashed in Room 101, learning to love Big Brother and losing his individuality, serving as a stark warning against totalitarianism and loss of freedom. "
+    },
+        {
+      id: 3,
+      title: "1984",
+      author: "George Orwell",
+      summery: "1984 is a dystopian novel about Winston Smith, a low-ranking Party member in totalitarian Oceania, who rebels against the omnipresent state led by Big Brother by secretly keeping a diary and starting a forbidden love affair with Julia, only to be captured, tortured by O'Brien, and ultimately brainwashed in Room 101, learning to love Big Brother and losing his individuality, serving as a stark warning against totalitarianism and loss of freedom. "
+    },
+    
 
   ];
 
 
   return (
     <div className="page-container">
-
-      <div className="placeholder"></div>
 
       {/* Presenting the new releases */}
       <div className="main-page-recommanded">
