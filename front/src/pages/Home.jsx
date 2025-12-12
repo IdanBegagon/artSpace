@@ -22,42 +22,7 @@ function Home() {
       author: "George RR Martin",
       summery: "Game of Thrones (GOT) book series (A Song of Ice and Fire) summarizes a massive fantasy epic where noble families in the fictional continents of Westeros & Essos battle for the Iron Throne, while an ancient supernatural threat from beyond the Wall awakens; it's defined by complex characters, political intrigue, moral ambiguity, and shocking betrayals, following storylines like Starks in the North, Lannisters in the South, and exiled Daenerys Targaryen's rise with dragons, all amidst impending winter."
     },
-    {
-          id: 3,
-      title: "G.O.T",
-      author: "George RR Martin",
-      summery: "Game of Thrones (GOT) book series (A Song of Ice and Fire) summarizes a massive fantasy epic where noble families in the fictional continents of Westeros & Essos battle for the Iron Throne, while an ancient supernatural threat from beyond the Wall awakens; it's defined by complex characters, political intrigue, moral ambiguity, and shocking betrayals, following storylines like Starks in the North, Lannisters in the South, and exiled Daenerys Targaryen's rise with dragons, all amidst impending winter."
-    },
-    {
-          id: 3,
-      title: "G.O.T",
-      author: "George RR Martin",
-      summery: "Game of Thrones (GOT) book series (A Song of Ice and Fire) summarizes a massive fantasy epic where noble families in the fictional continents of Westeros & Essos battle for the Iron Throne, while an ancient supernatural threat from beyond the Wall awakens; it's defined by complex characters, political intrigue, moral ambiguity, and shocking betrayals, following storylines like Starks in the North, Lannisters in the South, and exiled Daenerys Targaryen's rise with dragons, all amidst impending winter."
-    },
-    {
-          id: 3,
-      title: "G.O.T",
-      author: "George RR Martin",
-      summery: "Game of Thrones (GOT) book series (A Song of Ice and Fire) summarizes a massive fantasy epic where noble families in the fictional continents of Westeros & Essos battle for the Iron Throne, while an ancient supernatural threat from beyond the Wall awakens; it's defined by complex characters, political intrigue, moral ambiguity, and shocking betrayals, following storylines like Starks in the North, Lannisters in the South, and exiled Daenerys Targaryen's rise with dragons, all amidst impending winter."
-    },
-    {
-          id: 3,
-      title: "G.O.T",
-      author: "George RR Martin",
-      summery: "Game of Thrones (GOT) book series (A Song of Ice and Fire) summarizes a massive fantasy epic where noble families in the fictional continents of Westeros & Essos battle for the Iron Throne, while an ancient supernatural threat from beyond the Wall awakens; it's defined by complex characters, political intrigue, moral ambiguity, and shocking betrayals, following storylines like Starks in the North, Lannisters in the South, and exiled Daenerys Targaryen's rise with dragons, all amidst impending winter."
-    },
-    {
-          id: 3,
-      title: "G.O.T",
-      author: "George RR Martin",
-      summery: "Game of Thrones (GOT) book series (A Song of Ice and Fire) summarizes a massive fantasy epic where noble families in the fictional continents of Westeros & Essos battle for the Iron Throne, while an ancient supernatural threat from beyond the Wall awakens; it's defined by complex characters, political intrigue, moral ambiguity, and shocking betrayals, following storylines like Starks in the North, Lannisters in the South, and exiled Daenerys Targaryen's rise with dragons, all amidst impending winter."
-    },
-    {
-          id: 3,
-      title: "G.O.T",
-      author: "George RR Martin",
-      summery: "Game of Thrones (GOT) book series (A Song of Ice and Fire) summarizes a massive fantasy epic where noble families in the fictional continents of Westeros & Essos battle for the Iron Throne, while an ancient supernatural threat from beyond the Wall awakens; it's defined by complex characters, political intrigue, moral ambiguity, and shocking betrayals, following storylines like Starks in the North, Lannisters in the South, and exiled Daenerys Targaryen's rise with dragons, all amidst impending winter."
-    },
+
   ];
 
 
@@ -66,6 +31,7 @@ function Home() {
 
       <div className="placeholder"></div>
 
+      {/* Presenting the new releases */}
       <div className="main-page-recommanded">
         {cards.map(card => (
           <Card card={card} key={card.id} />
