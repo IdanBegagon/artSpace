@@ -1,0 +1,16 @@
+.page-container {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+
+}
+
+.main-page-recommanded {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 70%;
+    border: 1px solid red;
+    row-gap: 5rem;
+}
