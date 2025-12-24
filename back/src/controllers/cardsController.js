@@ -3,7 +3,7 @@ import Card from "../models/Card.js"
 export const getAllCards = async (req, res) => {
     try {
         const cards = await Card.find();
-        res.status(200).json({ message: "recieved all cards successfully" });
+        res.status(200).json(cards);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -11,8 +11,8 @@ export const getAllCards = async (req, res) => {
 
 export const createCard = async (req, res) => {
     try {
-        const { title, author, summery } = req.body;
-        const card = new Card({ title, author, summery });
+        const { title, author, summary } = req.body;
+        const card = new Card({ title, author, summary });
 
         await card.save()
         res.status(201).json({ message: "Note created successfully" });
@@ -23,7 +23,7 @@ export const createCard = async (req, res) => {
 
 export const updateCard = async (req, res) => {
     try {
-        const { title, author, summery } = req.body;
+        const { title, author, summary } = req.body;
         const updatedCard = await Card.findByIdAndUpdate(req.params.id, { title, author, summery });
 
         if (!updatedCard) return res.status(404).json({ message: "Card not found" });

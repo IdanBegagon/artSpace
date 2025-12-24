@@ -10,7 +10,7 @@ const cardSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        summery: {
+        summary: {
             type: String,
             required: true,
         },

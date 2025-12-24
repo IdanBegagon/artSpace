@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "../css/Card.css"
 import { useState } from "react";
 
@@ -7,7 +8,8 @@ function Card({ card }) {
 
 
     return (
-        <div className="card">
+        <Link to={`/card/${card._id}`} className="card"> 
+        
             <div className="top">
                 <span className="filler"></span>
                 <span className="card-title">{card.title}</span>
@@ -19,11 +21,11 @@ function Card({ card }) {
 
             <div className="author">{card.author}</div>
 
-            <div className="summary">{card.summery}</div>
+            <div className="summary">{card.summary}</div>
 
-            <button className="read-button">Read</button>
+            {/* <button className="read-button">Read</button> */}
 
-        </div >
+        </Link>
     )
 }
 
