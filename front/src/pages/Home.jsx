@@ -31,10 +31,10 @@ function Home() {
 
       {loading && <div>Loading cards...</div>}
 
-      {/* Presenting the new releases */}
+      {/* Presenting all summary releases */}
       <div className="main-page-recommanded">
         {cards.map(card => (
-          <Card card={card} key={card.id} />
+          <Card card={card} key={card._id} />
         ))}
       </div>
 
