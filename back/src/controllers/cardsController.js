@@ -1,4 +1,4 @@
-import Card from "../models/Card.js"
+import Card from "../models/cardModel.js"
 
 export const getAllCards = async (req, res) => {
     try {
@@ -24,7 +24,7 @@ export const createCard = async (req, res) => {
 export const updateCard = async (req, res) => {
     try {
         const { title, author, summary } = req.body;
-        const updatedCard = await Card.findByIdAndUpdate(req.params.id, { title, author, summery });
+        const updatedCard = await Card.findByIdAndUpdate(req.params.id, { title, author, summary });
 
         if (!updatedCard) return res.status(404).json({ message: "Card not found" });
     } catch (error) {
