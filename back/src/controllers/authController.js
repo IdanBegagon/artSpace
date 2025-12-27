@@ -11,9 +11,13 @@ export const signup = async (req, res) => {
     try {
 
         //check if email address doesnt exist already
-        const existingUser = await userModel.findOne({ email });
+        const existingEmail = await userModel.findOne({ email });
 
-        if (existingUser) { return res.json({ success: false, message: "User already exist" }); }
+        if (existingEmail) { return res.json({ success: false, message: "Email already in use" }); }
+
+        const existingUser = await userModel.findOne({ userName });
+
+        if (existingUser) { return res.json({ success: false, message: "Username already in use" }); }
 
         //password hashing with bcrypt
         const hashedPassword = await bcrypt.hash(password, 10);
