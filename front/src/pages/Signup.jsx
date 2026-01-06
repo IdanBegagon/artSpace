@@ -18,19 +18,18 @@ function Signup() {
 
         const { userName, email, password } = data;
         try {
-            const { data } = await axios.post("http://localhost:5001/api/auth/signup", {userName, email, password});
+            const { data } = await axios.post("http://localhost:5001/api/auth/signup", { userName, email, password });
 
-            if (!data.success) {
-                //alert(data.message);
-                setErrMsg(data.message);
-            }
-            else {
+            if (data.success) {
                 setData({});
                 console.log("Registered succsessfully");
                 navigate('/');
             }
+            else {
+                setErrMsg(data.message);
+            }
         } catch (error) {
-
+            console.log(error);
         }
     }
 
