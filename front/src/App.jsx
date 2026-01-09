@@ -6,6 +6,7 @@ import Profile from './pages/Profile'
 import Stories from './pages/Stories'
 import Navbar from './components/Navbar'
 import Signup from './pages/Signup'
+import Login from './pages/Login'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path='/profile' element={<Profile />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/story/:id' element={<Stories />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
       </main>
     </div>

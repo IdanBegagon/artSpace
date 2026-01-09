@@ -63,16 +63,19 @@ export const login = async (req, res) => {
 
         if (!isMatch) return res.json({ success: false, message: "Invalid password" });
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+        const token = jwt.sign({ id: user._id, userName: user.userName }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
-            maxAge: 7 * 24 * 60 * 60 * 1000
-        });
+        console.log(token);
+        res.json({ token });
 
-        return res.json({ success: true, message: "Logged in successfully" });
+        // res.cookie('token', token, {
+        //     httpOnly: true,
+        //     secure: process.env.NODE_ENV === 'production',
+        //     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+        //     maxAge: 7 * 24 * 60 * 60 * 1000
+        // });
+
+        // return res.json({ success: true, message: "Logged in successfully" });
 
     } catch (error) {
         res.json({ success: false, message: error.message });
@@ -94,3 +97,18 @@ export const logout = async (req, res) => {
         res.json({ success: false, message: error.message });
     }
 };
+
+export const protectedd = async (req, res) => {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader?.startsWith('Bearer ')) return res.json({ message: 'Missing token' })
+
+    //export the token itself (without the Bearer)
+    const token = authHeader.split(' ')[1];
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        res.json({ message: `Welcome ${decoded.userName}!` });
+    } catch (error) {
+        res.json(error);
+    }
+}
