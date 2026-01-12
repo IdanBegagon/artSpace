@@ -29,16 +29,6 @@ export const signup = async (req, res) => {
         //creating a token with jwt
         const token = jwt.sign({ id: user._id, userName: user.userName }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
-        // res.cookie('token', token, {
-        //     httpOnly: true,
-        //     //i'll change it in the env file to production to make this statment true and the website secured (https)
-        //     secure: process.env.NODE_ENV === 'production',
-        //     //when deploying, this makes sure the front and back will work together even with different urls (when they're not both on localhost)
-        //     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
-        //     //7 days in milisec (days, hours, min, sec, milisec)
-        //     maxAge: 7 * 24 * 60 * 60 * 1000
-        // });
-
         return res.json({ success: true, message: "User created successfully" });
 
     } catch (error) {
@@ -67,15 +57,6 @@ export const login = async (req, res) => {
 
         console.log(token);
         res.json({ token });
-
-        // res.cookie('token', token, {
-        //     httpOnly: true,
-        //     secure: process.env.NODE_ENV === 'production',
-        //     sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
-        //     maxAge: 7 * 24 * 60 * 60 * 1000
-        // });
-
-        // return res.json({ success: true, message: "Logged in successfully" });
 
     } catch (error) {
         res.json({ success: false, message: error.message });
@@ -113,6 +94,6 @@ export const protectedd = async (req, res) => {
             userName: decoded.userName
         });
     } catch (error) {
-        res.json(error);
+        res.json({error: error.message});
     }
 }

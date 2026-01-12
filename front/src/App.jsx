@@ -8,6 +8,7 @@ import Stories from './pages/Stories'
 import Navbar from './components/Navbar'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
+import CreateStory from './pages/CreateStoryPage'
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/createStory' element={<CreateStory token={token} />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/story/:id' element={<Stories />} />
           <Route path='/login' element={<Login token={token} setToken={setToken} setUserName={setUserName} />} />

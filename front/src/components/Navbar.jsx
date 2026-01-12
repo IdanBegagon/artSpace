@@ -14,7 +14,12 @@ function Navbar({ token, setToken, userName, setUserName }) {
             <div className="nav">
                 <Link to="/" className="link">Home</Link>
                 {/* show only if tokeen exist (indicates that there's a user logged in) */}
-                {token && <Link to="/profile" className="link">{userName}</Link>}
+                {token && (
+                    <>
+                    <Link to="/profile" className="link">{userName}</Link>
+                    <Link to="/createStory" className="link">+</Link>
+                    </>
+                    )}
 
                 {/* show different nav links depends if user is logged in or not */}
                 {!token ? (
