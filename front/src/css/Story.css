@@ -1,0 +1,18 @@
+.story-content {
+    white-space: pre-wrap;
+    line-height: 1.6;
+}
+
+h1 {
+    text-align: center;
+    margin: 0;
+}
+
+.story-author {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+p {
+    padding: 0 200px;
+}

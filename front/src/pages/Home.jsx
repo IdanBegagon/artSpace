@@ -13,7 +13,7 @@ function Home() {
   useEffect(() => {
     const getCards = async () => {
       try {
-        const res = await axios.get("http://localhost:5001/api/cards")
+        const res = await axios.get("http://localhost:5001/api/story/getAllStories")
         console.log(res.data);
         setCards(res.data);
       } catch (error) {
@@ -34,9 +34,9 @@ function Home() {
       {/* Presenting all summary releases */}
       <div className="main-page-recommanded">
         {cards.map(card => (
-          <Card card={card} key={card._id} />
+          <Card story={card} key={card._id} />
         ))}
-      </div>
+      </div> 
 
     </div>
   )

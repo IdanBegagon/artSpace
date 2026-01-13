@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 function LoginForm({ setToken, setUserName }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errMessage, setErrMessage] = useState('');
     const navigate = useNavigate();
 
     async function handleLogin(e) {
@@ -20,6 +21,10 @@ function LoginForm({ setToken, setUserName }) {
             const userNameRes = await axios.get("http://localhost:5001/api/auth/protected", {
                 headers: { Authorization: `Bearer ${newToken}` }
             });
+
+            if(!res.data.success){
+                setErrMessage(res.data.message);
+            }
 
             //saving the username to the state in app.jsx and navigating to homepage
             if (userNameRes.data.userName) {
@@ -43,6 +48,7 @@ function LoginForm({ setToken, setUserName }) {
 
                 <button type="submit">login</button>
             </form>
+            <p>{errMessage}</p>
 
         </div>
     )

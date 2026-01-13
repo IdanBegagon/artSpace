@@ -4,7 +4,7 @@ import axios from "axios"
 import "./css/App.css"
 import Home from './pages/Home'
 import Profile from './pages/Profile'
-import Stories from './pages/Stories'
+import StoryPage from './pages/StoryPage'
 import Navbar from './components/Navbar'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
@@ -45,10 +45,10 @@ function App() {
       <main>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile' element={<Profile token={token} />} />
           <Route path='/createStory' element={<CreateStory token={token} />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path='/story/:id' element={<Stories />} />
+          <Route path='/story/:id' element={<StoryPage />} />
           <Route path='/login' element={<Login token={token} setToken={setToken} setUserName={setUserName} />} />
         </Routes>
       </main>
