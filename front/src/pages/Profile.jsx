@@ -5,13 +5,18 @@ import Card from "../components/Card"
 
 function Profile({ token }) {
     const [stories, setStories] = useState([]);
+    const [edit, setEdit] = useState(false);
+
+    const handleRemove = (deletedStory) => {
+        setStories(stories.filter(s => s._id !== deletedStory));
+    }
 
     useEffect(() => {
         if (token) {
             axios.get("http://localhost:5001/api/story/getUserStories", { headers: { Authorization: `Bearer ${token}` } })
                 .then(res => {
                     console.log("Stories received:", res.data);
-                    if (res.data.success){
+                    if (res.data.success) {
                         setStories(res.data.stories);
                     }
                 })
@@ -19,15 +24,30 @@ function Profile({ token }) {
         }
     }, [token]);
 
+    async function handleManageStories() {
+        try {
+
+        } catch (error) {
+
+        }
+
+    }
+
 
     return (
         <>
-        <p>That's your profile</p>
-        
-        {stories.map(story => (
-            <Card story={story} key={story._id}/>
-        ))}
+            <div className="page-container">
+                {stories.map(story => (
+                    <Card
+                        story={story}
+                        edit={edit}
+                        key={story._id}
+                        token={token}
+                        handleRemove={handleRemove} />))}
+            </div>
+            <button onClick={() => setEdit(!edit)}>Edit</button>
         </>
+
     )
 }
 

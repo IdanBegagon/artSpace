@@ -64,3 +64,14 @@ export const verifyToken = (req, res, next) => {
     }
 
 }
+
+export const deleteStory = async (req, res) => {
+    try {
+        const deletedStory = await storyModel.findByIdAndDelete(req.params.id);
+
+        if (!deletedStory) return res.status(404).json({ message: "Story not found" });
+        res.json({ success: true, message: "Story deleted" });
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+};

@@ -36,7 +36,8 @@ export const deleteCard = async (req, res) => {
     try {
         const deletedCard = await Card.findByIdAndDelete(req.params.id);
 
-        if (!deletedCard) return res.status(404).json({ message: "Card not found" });
+        if (!deletedCard) return res.status(404).json({ message: "Story not found" });
+        res.json({ success: true, message: "Story deleted" });
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
