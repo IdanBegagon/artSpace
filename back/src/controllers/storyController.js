@@ -75,3 +75,21 @@ export const deleteStory = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 };
+
+export const editStory = async (req, res) => {
+    try {
+        const{title, content, summary} = req.body;
+        //check if the author of the story is the one trying to edit
+        const story = await storyModel.findById(req.params.id);
+        if(story.author.toString() !== req.userId){
+            return res.json({succss: false, message: "You're not allowed to edit this story!"});
+        }
+
+        const editStory = await storyModel.findByIdAndUpdate(req.params.id, {title, content, summary}, {new: true});
+        if (!editStory) return res.status(404).json({success: false, message:"Story not found"});
+
+        res.json({success:true, editStory});
+    } catch (error) {
+        res.json({success:false, error: error.message});
+    }
+};

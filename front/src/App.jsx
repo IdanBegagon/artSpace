@@ -9,6 +9,7 @@ import Navbar from './components/Navbar'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import CreateStory from './pages/CreateStoryPage'
+import EditStoryPage from './pages/EditStoryPage'
 
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/story/:id' element={<StoryPage />} />
           <Route path='/login' element={<Login token={token} setToken={setToken} setUserName={setUserName} />} />
+          <Route path='/editStory/:id' element={<EditStoryPage token={token} />} />
         </Routes>
       </main>
     </div>

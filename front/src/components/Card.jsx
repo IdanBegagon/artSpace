@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../css/Card.css"
 import { useState } from "react";
 import axios from "axios";
@@ -6,6 +6,7 @@ import axios from "axios";
 function Card({ story, edit, token, handleRemove }) {
 
     const [favorite, setFavorite] = useState(false);
+    const navigate = useNavigate();
 
     function favoriteHandle(e) {
         setFavorite(!favorite);
@@ -32,6 +33,12 @@ function Card({ story, edit, token, handleRemove }) {
         }
     }
 
+    function handleEdit(e){
+        e.preventDefault();
+        e.stopPropagation();
+        navigate(`/editStory/${story._id}`);
+    }
+
 
     return (
         <Link to={`/story/${story._id}`} className="card">
@@ -40,7 +47,7 @@ function Card({ story, edit, token, handleRemove }) {
             {edit &&
                 <div className="action-btn">
                     <button className="circle-btn delete-btn" onClick={handleDelete}><img src="/delete-icon.svg" alt="delete button" /></button>
-                    <button className="circle-btn edit-btn"><img src="/edit-icon.svg" alt="edit button" /></button>
+                    <button className="circle-btn edit-btn" onClick={handleEdit}><img src="/edit-icon.svg" alt="edit button" /></button>
                 </div>}
 
             <div className="top">
