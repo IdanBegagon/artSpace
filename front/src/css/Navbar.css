@@ -14,5 +14,39 @@
     text-decoration: none;
     color: black;
     font-size: 30px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
 }
 
+.artspace-icon {
+    width: 50px;
+}
+
+.main-page-link {
+    display: flex;
+    align-items: center;
+}
+
+.collapse{
+    display: flex;
+    flex-direction: column;
+    height: 30px;
+}
+
+.collapse-items{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.collapse-link {
+    text-align: center;
+    border-radius: 20px;
+    border: 1px solid #e2e7e8;
+    background-color: #e2e7e8;
+    width: 200px;
+    height: 40px;
+}

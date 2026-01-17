@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom"
+import { useState } from "react";
 import "../css/Navbar.css"
 
 function Navbar({ token, setToken, userName, setUserName }) {
+
+    const [isCollapsed, setIsCollapsed] = useState(false)
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -9,17 +12,17 @@ function Navbar({ token, setToken, userName, setUserName }) {
         setUserName(null);
     }
 
+    const handleCollapse = () => {
+        setIsCollapsed(!isCollapsed);
+    }
+
     return (
         <nav>
             <div className="nav">
-                <Link to="/" className="link">Home</Link>
-                {/* show only if tokeen exist (indicates that there's a user logged in) */}
-                {token && (
-                    <>
-                    <Link to="/profile" className="link">{userName}</Link>
-                    <Link to="/createStory" className="link">+</Link>
-                    </>
-                    )}
+                <Link to="/" className="link main-page-link">
+                    <img src="/ArtSpaceIcon.png" className="artspace-icon" alt="home page" />
+                    ArtSpace</Link>
+
 
                 {/* show different nav links depends if user is logged in or not */}
                 {!token ? (
@@ -28,7 +31,20 @@ function Navbar({ token, setToken, userName, setUserName }) {
                         <Link to="/login" className="link">login</Link>
                     </>
                 ) : (
-                    <button className="link" onClick={handleLogout}>Logout</button>
+                    <>
+                        {!isCollapsed ? (
+                            <span className="link" onClick={handleCollapse}>{userName}</span>
+                        ) : (
+                            <div className="collapse">
+                                <span className="link" onClick={handleCollapse}>{userName}</span>
+                                <div className="collapse-items">
+                                <Link to="/profile" onClick={handleCollapse} className="link collapse-link">Your profile</Link>
+                                <Link to="/createStory" onClick={handleCollapse} className="link collapse-link">+</Link>
+                                <span className="link collapse-link" onClick={() => { handleCollapse(); handleLogout(); }}>Logout</span>
+                                </div>
+                            </div>
+                        )}
+                    </>
                 )}
 
             </div>

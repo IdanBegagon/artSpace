@@ -54,6 +54,7 @@ function App() {
           <Route path='/editStory/:id' element={<EditStoryPage token={token} />} />
         </Routes>
       </main>
+      <footer></footer>
     </div>
   )
 }
