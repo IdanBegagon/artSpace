@@ -26,25 +26,40 @@ function Navbar({ token, setToken, userName, setUserName }) {
 
                 {/* show different nav links depends if user is logged in or not */}
                 {!token ? (
-                    <>
+                    <div className="log-sign">
                         <Link to="/signup" className="link">sign up</Link>
                         <Link to="/login" className="link">login</Link>
-                    </>
+                    </div>
                 ) : (
-                    <>
-                        {!isCollapsed ? (
-                            <span className="link" onClick={handleCollapse}>{userName}</span>
-                        ) : (
-                            <div className="collapse">
-                                <span className="link" onClick={handleCollapse}>{userName}</span>
-                                <div className="collapse-items">
+
+                    <div className="collapse">
+                        <span className="link" onClick={handleCollapse}>{userName}</span>
+
+                        <div className={`collapse-items ${isCollapsed ? "show" : ""}`}>
+                            <Link to="/profile" onClick={handleCollapse} className="link collapse-link">
+                            <img src="/profile-icon.svg" alt="" />
+                            </Link>
+                            <Link to="/createStory" onClick={handleCollapse} className="link collapse-link">
+                            <img src="/write-icon.svg" alt="" />
+                            </Link>
+                            <span
+                                className="link collapse-link"
+                                onClick={() => { handleCollapse(); handleLogout(); }}
+                            > <img src="/logout-icon.svg" alt="" />
+                            </span>
+                        </div>
+
+                        {/* {isCollapsed && (
+                            <div className="collapse-items">
                                 <Link to="/profile" onClick={handleCollapse} className="link collapse-link">Your profile</Link>
                                 <Link to="/createStory" onClick={handleCollapse} className="link collapse-link">+</Link>
                                 <span className="link collapse-link" onClick={() => { handleCollapse(); handleLogout(); }}>Logout</span>
-                                </div>
                             </div>
-                        )}
-                    </>
+                        )} */}
+                    </div>
+
+
+
                 )}
 
             </div>

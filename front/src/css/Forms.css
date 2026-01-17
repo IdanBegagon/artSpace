@@ -65,7 +65,8 @@ label {
 .submit-btn {
     border: none;
     border-radius: 30px;
-    width: 100px;
+    min-width: 100px;
+    max-width: 150px;
     background-color: #D8C9E2;
     padding: 15px;
     font-size: 15px;

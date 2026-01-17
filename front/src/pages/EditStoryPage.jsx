@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import "../css/Forms.css";
 
 
 function EditStoryPage({ token }) {
@@ -11,6 +12,8 @@ function EditStoryPage({ token }) {
         content: "",
         summary: ""
     });
+    const titleMaxChar = 40;
+    const summaryMaxChar = 500;
 
     useEffect(() => {
         axios.get(`http://localhost:5001/api/story/getStoryById/${id}`)
@@ -34,7 +37,7 @@ function EditStoryPage({ token }) {
             if (data.success) {
                 navigate("/profile");
             }
-            else{
+            else {
                 alert(data.message);
             }
         } catch (error) {
@@ -43,31 +46,46 @@ function EditStoryPage({ token }) {
     }
 
     return (
-        <>
-            <h1>Edit story</h1>
-            <form onSubmit={handleSubmit}>
-                <label>Title</label>
-                <input
-                    type="text"
-                    value={edit.title}
-                    onChange={e => setEdit({ ...edit, title: e.target.value })} />
+        <div className="form-page">
+            <div className="outer-form">
+                <h1 className="form-title">Edit story</h1>
+                <hr />
 
-                <label>content</label>
-                <input
-                    type="text"
-                    value={edit.content}
-                    onChange={e => setEdit({ ...edit, content: e.target.value })} />
+                <form className="form-container" onSubmit={handleSubmit}>
+                    <label className="title-label">
+                        <span className="line">
+                            <span>Story title</span> <span>{edit.title.length}/40</span>
+                        </span>
+                        <input
+                            className="input-box"
+                            type="text"
+                            value={edit.title}
+                            onChange={e => setEdit({ ...edit, title: e.target.value })} />
+                    </label>
 
-                <label>summary</label>
-                <input
-                    type="text"
-                    value={edit.summary}
-                    onChange={e => setEdit({ ...edit, title: e.target.value })} />
+                    <label>Your story
+                        <textarea
+                            className="input-box content-box"
+                            
+                            value={edit.content}
+                            onChange={e => setEdit({ ...edit, content: e.target.value })} />
+                    </label>
 
-                <button type="submit">Update story</button>
-            </form>
+                    <label>
+                        <span className="line">
+                            <span>Story summary</span> <span>{edit.summary.length}/500</span>
+                        </span>
+                        <textarea
+                            className="input-box summary-box"
+                            
+                            value={edit.summary}
+                            onChange={e => setEdit({ ...edit, title: e.target.value })} />
+                    </label>
 
-        </>
+                    <button className="submit-btn" type="submit">Update story</button>
+                </form>
+            </div>
+        </div>
     )
 }
 
