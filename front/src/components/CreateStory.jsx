@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import "../css/Forms.css";
 
 function CreateStory({ token }) {
 
@@ -9,6 +9,8 @@ function CreateStory({ token }) {
     const [content, setContent] = useState('');
     const [summary, setSummary] = useState('');
     const navigate = useNavigate();
+    const titleMaxChar = 40;
+    const summaryMaxChar = 500;
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -21,19 +23,35 @@ function CreateStory({ token }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <div className="form-page">
+            <div className="outer-form">
+                <h1 className="form-title">Write a new story</h1>
+                <hr />
 
-            <label>Title</label>
-            <input type="text" value={title} onChange={e => setTitle(e.target.value)} />
+                <form className="form-container" onSubmit={handleSubmit}>
 
-            <label>Content</label>
-            <textarea type="text" value={content} onChange={e => setContent(e.target.value)} />
+                    <label className="title-label">
+                        <span className="line">
+                            <span>Story title</span> <span>{title.length}/40</span>
+                        </span>
+                        <input className="input-box" type="text" maxLength={titleMaxChar} value={title} onChange={e => setTitle(e.target.value)} />
+                    </label>
 
-            <label>Summary</label>
-            <textarea type="text" value={summary} onChange={e => setSummary(e.target.value)} />
+                    <label>Your story
+                        <textarea className="input-box content-box" type="text" value={content} onChange={e => setContent(e.target.value)} />
+                    </label>
 
-            <button type="submit">Post story</button>
-        </form>
+                    <label>
+                        <span className="line">
+                            <span>Story summary</span> <span>{summary.length}/500</span>
+                        </span>
+                        <textarea className="input-box summary-box" type="text" maxLength={summaryMaxChar} value={summary} onChange={e => setSummary(e.target.value)} />
+                    </label>
+
+                    <button className="submit-btn" type="submit">Post story</button>
+                </form>
+            </div>
+        </div>
     )
 }
 

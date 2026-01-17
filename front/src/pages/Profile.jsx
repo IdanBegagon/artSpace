@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Card from "../components/Card"
+import "../css/Home.css"
 
 
 function Profile({ token }) {
@@ -35,8 +36,8 @@ function Profile({ token }) {
 
 
     return (
-        <>
-            <div className="page-container">
+        <div className="page-container">
+            <div className="main-page-recommanded">
                 {stories.map(story => (
                     <Card
                         story={story}
@@ -46,7 +47,7 @@ function Profile({ token }) {
                         handleRemove={handleRemove} />))}
             </div>
             <button onClick={() => setEdit(!edit)}>Edit</button>
-        </>
+        </div>
 
     )
 }

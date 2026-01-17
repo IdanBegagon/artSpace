@@ -41,10 +41,10 @@ function LoginForm({ setToken, setUserName }) {
         <div>
             <form onSubmit={handleLogin}>
                 <label>Email</label>
-                <input type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+                <input className="input-box" type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
 
                 <label>Password</label>
-                <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+                <input className="input-box" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
 
                 <button type="submit">login</button>
             </form>
