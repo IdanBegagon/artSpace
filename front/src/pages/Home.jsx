@@ -1,40 +1,22 @@
-import { useEffect, useState } from "react";
 import Card from "../components/Card"
 import "../css/Home.css"
-import axios from "axios"
 
 
-function Home() {
-  
-  const [cards, setCards] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  //Load once all of the cards
-  useEffect(() => {
-    const getCards = async () => {
-      try {
-        const res = await axios.get("http://localhost:5001/api/story/getAllStories")
-        console.log(res.data);
-        setCards(res.data);
-      } catch (error) {
-        console.log("Error getting cards");
-      } finally{
-        setLoading(false);
-      }
-    }
-
-    getCards();
-  },[])
+function Home({token, userId, cards, onToggleFavorite}) {
 
   return (
     <div className="page-container">
 
-      {loading && <div>Loading cards...</div>}
-
       {/* Presenting all summary releases */}
       <div className="main-page-recommanded">
         {cards.map(card => (
-          <Card story={card} key={card._id} />
+          <Card 
+          story={card} 
+          key={card._id} 
+          token={token} 
+          userId={userId}
+          onToggleFavorite={onToggleFavorite} />
         ))}
       </div> 
 

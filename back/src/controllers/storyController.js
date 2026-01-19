@@ -33,9 +33,9 @@ export const getAllStories = async (req, res) => {
 export const getUserStories = async (req, res) => {
     try {
         const stories = await storyModel.find({ author: req.userId }).populate('author', 'userName');
-        res.json({success: true, message: "successfully got user's stories", stories});
+        res.json({ success: true, message: "successfully got user's stories", stories });
     } catch (error) {
-        res.json({success: false, error: error.message});
+        res.json({ success: false, error: error.message });
     }
 }
 
@@ -44,7 +44,7 @@ export const getStoryById = async (req, res) => {
         const story = await storyModel.findById(req.params.id).populate('author', 'userName');
         res.json(story);
     } catch (error) {
-        res.json({error: error.message});
+        res.json({ error: error.message });
     }
 }
 
@@ -78,18 +78,46 @@ export const deleteStory = async (req, res) => {
 
 export const editStory = async (req, res) => {
     try {
-        const{title, content, summary} = req.body;
+        const { title, content, summary } = req.body;
         //check if the author of the story is the one trying to edit
         const story = await storyModel.findById(req.params.id);
-        if(story.author.toString() !== req.userId){
-            return res.json({succss: false, message: "You're not allowed to edit this story!"});
+        if (story.author.toString() !== req.userId) {
+            return res.json({ succss: false, message: "You're not allowed to edit this story!" });
         }
 
-        const editStory = await storyModel.findByIdAndUpdate(req.params.id, {title, content, summary}, {new: true});
-        if (!editStory) return res.status(404).json({success: false, message:"Story not found"});
+        const editStory = await storyModel.findByIdAndUpdate(req.params.id, { title, content, summary }, { new: true });
+        if (!editStory) return res.status(404).json({ success: false, message: "Story not found" });
 
-        res.json({success:true, editStory});
+        res.json({ success: true, editStory });
     } catch (error) {
-        res.json({success:false, error: error.message});
+        res.json({ success: false, error: error.message });
+    }
+};
+
+export const toggleFavorite = async (req, res) => {
+    try {
+        const story = await storyModel.findById(req.params.id);
+        const userId = req.userId;
+
+        if (story.favorites.includes(userId)) {
+            //if the user id is already exist on the favorite array that means the user clicked again the favorite button to remove from favorite (so i filter it out)
+            story.favorites = story.favorites.filter(id => id.toString() !== userId);
+        } else {
+            story.favorites.push(userId);
+        }
+
+        await story.save();
+        res.json({ success: true, favorites: story.favorites });
+    } catch (error) {
+        res.json({ success: false, error: error.message });
+    }
+};
+
+export const getFavoriteStories = async (req, res) => {
+    try {
+        const stories = await storyModel.find({ favorites: req.userId }).populate('author', 'userName');
+        res.json({ success: true, stories });
+    } catch (error) {
+        res.json({success: false, error: error.message});
     }
 };

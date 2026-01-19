@@ -1,15 +1,19 @@
 import { Link } from "react-router-dom"
 import { useState } from "react";
-import "../css/Navbar.css"
+import "../css/Navbar.css";
+import { useNavigate } from "react-router-dom";
 
-function Navbar({ token, setToken, userName, setUserName }) {
+function Navbar({ token, setToken, userName, setUserName, setUserId }) {
 
     const [isCollapsed, setIsCollapsed] = useState(false)
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         localStorage.removeItem("token");
         setToken(null);
         setUserName(null);
+        setUserId(null);
+        navigate("/");
     }
 
     const handleCollapse = () => {
@@ -37,10 +41,10 @@ function Navbar({ token, setToken, userName, setUserName }) {
 
                         <div className={`collapse-items ${isCollapsed ? "show" : ""}`}>
                             <Link to="/profile" onClick={handleCollapse} className="link collapse-link">
-                            <img src="/profile-icon.svg" alt="" />
+                                <img src="/profile-icon.svg" alt="" />
                             </Link>
                             <Link to="/createStory" onClick={handleCollapse} className="link collapse-link">
-                            <img src="/write-icon.svg" alt="" />
+                                <img src="/write-icon.svg" alt="" />
                             </Link>
                             <span
                                 className="link collapse-link"

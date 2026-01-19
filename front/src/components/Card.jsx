@@ -3,15 +3,27 @@ import "../css/Card.css"
 import { useState } from "react";
 import axios from "axios";
 
-function Card({ story, edit, token, handleRemove }) {
+function Card({ story, edit, token, handleRemove, userId, onToggleFavorite }) {
 
-    const [favorite, setFavorite] = useState(false);
+    //const [favorite, setFavorite] = useState(false);
+    const isFavorite = story.favorites?.includes(userId);
     const navigate = useNavigate();
 
-    function favoriteHandle(e) {
-        setFavorite(!favorite);
+    async function handleFavorite(e) {
         e.preventDefault();
         e.stopPropagation();
+
+        try {
+            const res = await axios.post(`http://localhost:5001/api/story/toggleFavorite/${story._id}`, {}, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            if (res.data.success) {
+                onToggleFavorite(story._id, res.data.favorites);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     async function handleDelete(e) {
@@ -33,7 +45,7 @@ function Card({ story, edit, token, handleRemove }) {
         }
     }
 
-    function handleEdit(e){
+    function handleEdit(e) {
         e.preventDefault();
         e.stopPropagation();
         navigate(`/editStory/${story._id}`);
@@ -52,8 +64,8 @@ function Card({ story, edit, token, handleRemove }) {
 
             <div className="top">
                 <span className="card-title">{story.title}</span>
-                <button className="favorite-btn" onClick={favoriteHandle}>
-                    {favorite ? <img src="/favorite-icon-on.svg" alt="favorite button" /> : <img src="/favorite-icon-off.svg" alt="favorite button" />}
+                <button className="favorite-btn" onClick={handleFavorite}>
+                    <img src={isFavorite ? "/favorite-icon-on.svg" : "/favorite-icon-off.svg"} />
                 </button>
 
             </div>

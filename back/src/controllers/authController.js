@@ -55,8 +55,7 @@ export const login = async (req, res) => {
 
         const token = jwt.sign({ id: user._id, userName: user.userName }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
-        console.log(token);
-        res.json({ token });
+        res.json({ success: true, token, userId: user._id });
 
     } catch (error) {
         res.json({ success: false, message: error.message });
@@ -91,7 +90,8 @@ export const protectedd = async (req, res) => {
         //response back the username for frontend use
         res.json({
             message: `Welcome ${decoded.userName}!`,
-            userName: decoded.userName
+            userName: decoded.userName,
+            id: decoded.id
         });
     } catch (error) {
         res.json({error: error.message});

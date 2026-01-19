@@ -18,7 +18,12 @@ const storySchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
         required: true
-    }
+    },
+    //making this an array to save multiple users on 1 story
+    favorites:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
+    }]
 }, {timestamps: true});
 
 const storyModel = mongoose.model('story', storySchema);
