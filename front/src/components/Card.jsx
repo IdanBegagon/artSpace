@@ -3,7 +3,7 @@ import "../css/Card.css"
 import { useState } from "react";
 import axios from "axios";
 
-function Card({ story, edit, token, handleRemove, userId, onToggleFavorite }) {
+function Card({ story, edit, view, token, handleRemoveCard, userId, onToggleFavorite }) {
 
     //const [favorite, setFavorite] = useState(false);
     const isFavorite = story.favorites?.includes(userId);
@@ -36,7 +36,7 @@ function Card({ story, edit, token, handleRemove, userId, onToggleFavorite }) {
                 const res = await axios.delete(`http://localhost:5001/api/story/deleteStory/${story._id}`, { headers: { Authorization: `Bearer ${token}` } });
 
                 if (res.data.success) {
-                    handleRemove(story._id);
+                    handleRemoveCard(story._id);
                 }
 
             } catch (error) {

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../css/Forms.css";
 
-function CreateStory({ token }) {
+function CreateStory({ token, setCards }) {
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -15,7 +15,8 @@ function CreateStory({ token }) {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            await axios.post("http://localhost:5001/api/story/createStory", { title, content, summary }, { headers: { Authorization: `Bearer ${token}` } })
+            const res = await axios.post("http://localhost:5001/api/story/createStory", { title, content, summary }, { headers: { Authorization: `Bearer ${token}` } });
+            setCards(prevCards => [res.data.newStory, ...prevCards]);
             navigate("/profile");
         } catch (error) {
             console.log(`Error creating a story: ${error}`);

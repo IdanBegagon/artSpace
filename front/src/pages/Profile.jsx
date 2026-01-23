@@ -4,7 +4,7 @@ import Card from "../components/Card"
 import "../css/Home.css"
 
 
-function Profile({ token, userId, cards, onToggleFavorite }) {
+function Profile({ token, userId, cards, onToggleFavorite, handleRemoveCard }) {
     const [stories, setStories] = useState([]);
     const [edit, setEdit] = useState(false);
     const [view, setView] = useState("userStories");
@@ -30,15 +30,21 @@ function Profile({ token, userId, cards, onToggleFavorite }) {
                     <Card
                         story={story}
                         edit={edit}
+                        view={view}
                         key={story._id}
                         token={token}
-                        handleRemove={handleRemove}
+                        handleRemoveCard={handleRemoveCard}
                         userId={userId}
                         onToggleFavorite={onToggleFavorite} />))}
             </div>
-            <button onClick={() => setEdit(!edit)}>Edit</button>
             <button onClick={() => setView("userStories")}>My Stories</button>
-            <button onClick={() => setView("favorites")}>Favorites</button>
+            <button onClick={() => {
+                setView("favorites");
+                setEdit(false);
+            }}>Favorites
+            </button>
+            {view === "userStories" && <button onClick={() => setEdit(!edit)}>Edit</button>}
+
         </div>
 
     )

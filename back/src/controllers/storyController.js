@@ -5,7 +5,8 @@ export const createStory = async (req, res) => {
     try {
         const { title, content, summary } = req.body;
 
-        const newStory = new storyModel({
+        //im using let because in line 18 i change this variable
+        let newStory = new storyModel({
             title,
             content,
             summary,
@@ -13,6 +14,8 @@ export const createStory = async (req, res) => {
         });
 
         await newStory.save();
+        //I populate this to be able to present the new story imidietly on the user's profile
+        newStory = await newStory.populate('author', 'userName');
         //I added newStory to the response to be able to use newStory._id in the frontend immidiately 
         res.json({ success: true, message: "story created successfully", newStory })
     } catch (error) {

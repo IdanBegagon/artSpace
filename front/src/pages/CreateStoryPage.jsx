@@ -3,11 +3,14 @@ import axios from "axios";
 import CreateStory from "../components/CreateStory"
 import Protected from "../components/Protected";
 
-function Login({ token }) {
+function CreateStoryPage({ token, setCards }) {
+    
+    
+    
     return (
         <div>
             {token ? (
-                <CreateStory token={token} />
+                <CreateStory token={token} setCards={setCards} />
             ) : (
                 <p>you need to login in order to write a story</p>
             )}
@@ -16,4 +19,4 @@ function Login({ token }) {
 
 }
 
-export default Login;
+export default CreateStoryPage;

@@ -65,6 +65,10 @@ function App() {
     );
   };
 
+  const handleRemoveCard = (storyId) => {
+  setCards(prevCards => prevCards.filter(card => card._id !== storyId));
+};
+
   return (
     <div className='app-pages'>
       <nav>
@@ -73,8 +77,8 @@ function App() {
       <main>
         <Routes>
           <Route path='/' element={<Home token={token} userId={userId} cards={cards} setCards={setCards} onToggleFavorite={onToggleFavorite} />} />
-          <Route path='/profile' element={<Profile token={token} userId={userId} cards={cards} setCards={setCards} onToggleFavorite={onToggleFavorite} />} />
-          <Route path='/createStory' element={<CreateStory token={token} />} />
+          <Route path='/profile' element={<Profile token={token} userId={userId} cards={cards} setCards={setCards} onToggleFavorite={onToggleFavorite} handleRemoveCard={handleRemoveCard} />} />
+          <Route path='/createStory' element={<CreateStory token={token} setCards={setCards} />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/story/:id' element={<StoryPage />} />
           <Route path='/login' element={<Login token={token} setToken={setToken} setUserName={setUserName} setUserId={setUserId} />} />
