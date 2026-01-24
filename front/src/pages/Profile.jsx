@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Card from "../components/Card"
 import "../css/Home.css"
+import "../css/Profile.css"
 
 
 function Profile({ token, userId, cards, onToggleFavorite, handleRemoveCard }) {
@@ -24,7 +25,18 @@ function Profile({ token, userId, cards, onToggleFavorite, handleRemoveCard }) {
 
 
     return (
-        <div className="page-container">
+        <div className="page-container profile-page">
+
+            <div className="profile-button-swap">
+                <button className={`profile-btn ${view === "userStories" ? "active" : ""}`} onClick={() => setView("userStories")}>My Stories</button>
+                <button className={`profile-btn ${view === "favorites" ? "active" : ""}`} onClick={() => {
+                    setView("favorites");
+                    setEdit(false);
+                }}>Favorites
+                </button>
+                <div className={`sliding-underline ${view}`} />
+            </div>
+
             <div className="main-page-recommanded">
                 {displayCards.map(story => (
                     <Card
@@ -37,13 +49,10 @@ function Profile({ token, userId, cards, onToggleFavorite, handleRemoveCard }) {
                         userId={userId}
                         onToggleFavorite={onToggleFavorite} />))}
             </div>
-            <button onClick={() => setView("userStories")}>My Stories</button>
-            <button onClick={() => {
-                setView("favorites");
-                setEdit(false);
-            }}>Favorites
-            </button>
-            {view === "userStories" && <button onClick={() => setEdit(!edit)}>Edit</button>}
+
+            {view === "userStories" && <button className="floating-edit-btn" onClick={() => setEdit(!edit)}>
+                    <img src="/edit-btn-icon.svg" alt="" />
+            </button>}
 
         </div>
 

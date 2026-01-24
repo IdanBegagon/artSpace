@@ -12,3 +12,24 @@
     width: 80%;
     gap: 30px;
 }
+
+.main-page-recommanded {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* This aligns the cards to the left too */
+    width: 100%; /* Now 100% of the 80% container */
+    gap: 30px;
+}
+
+.recent-releases{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 80%;
+}
+
+.recent-releases h1 {
+    margin-left: 0;
+    padding-bottom: 20px;
+    align-self: flex-start; /* Double insurance to keep it left */
+}
