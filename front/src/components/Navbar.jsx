@@ -3,7 +3,7 @@ import { useState } from "react";
 import "../css/Navbar.css";
 import { useNavigate } from "react-router-dom";
 
-function Navbar({ token, setToken, userName, setUserName, setUserId }) {
+function Navbar({ token, setToken, userName, setUserName, setUserId, search, setSearch, setIsSearching }) {
 
     const [isCollapsed, setIsCollapsed] = useState(false)
     const navigate = useNavigate();
@@ -26,6 +26,17 @@ function Navbar({ token, setToken, userName, setUserName, setUserId }) {
                 <Link to="/" className="link main-page-link">
                     <img src="/ArtSpaceIcon.png" className="artspace-icon" alt="home page" />
                     ArtSpace</Link>
+
+                <div className="nav-search">
+                    <input
+                        className="search-bar"
+                        type="text"
+                        placeholder="Search stories..."
+                        value={search}
+                        onFocus={() => setIsSearching(true)}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                </div>
 
 
                 {/* show different nav links depends if user is logged in or not */}

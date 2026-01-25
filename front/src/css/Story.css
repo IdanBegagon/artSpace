@@ -1,11 +1,30 @@
 .story-content {
+    display: flex;
+    flex-direction: column;
     white-space: pre-wrap;
     line-height: 1.6;
+}
+
+.story-header {
+    align-self: center;
+    display: flex;
+    width: 100;
 }
 
 h1 {
     text-align: center;
     margin: 0;
+}
+
+.favorite-btn-story{
+    align-self: right;
+    background: none;
+    border: none;
+    cursor: pointer;
+    top: 0;
+    right: 10px;
+    display: flex;
+    gap: 8px;
 }
 
 .story-author {

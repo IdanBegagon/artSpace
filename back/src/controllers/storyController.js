@@ -26,7 +26,7 @@ export const createStory = async (req, res) => {
 export const getAllStories = async (req, res) => {
     try {
         //.populate placing the actucal user name from the user schema instead of the user id (like join and select of sql)
-        const stories = await storyModel.find().populate('author', 'userName');
+        const stories = (await storyModel.find().populate('author', 'userName').sort({ createdAt: -1}));
         res.json(stories);
     } catch (error) {
         res.json({ error: error.message });
@@ -88,7 +88,7 @@ export const editStory = async (req, res) => {
             return res.json({ succss: false, message: "You're not allowed to edit this story!" });
         }
 
-        const editStory = await storyModel.findByIdAndUpdate(req.params.id, { title, content, summary }, { new: true });
+        const editStory = await storyModel.findByIdAndUpdate(req.params.id, { title, content, summary }, { new: true }).populate('author', 'userName');
         if (!editStory) return res.status(404).json({ success: false, message: "Story not found" });
 
         res.json({ success: true, editStory });

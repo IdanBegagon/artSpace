@@ -4,7 +4,7 @@ import axios from "axios";
 import "../css/Forms.css";
 
 
-function EditStoryPage({ token }) {
+function EditStoryPage({ token, onUpdateStory }) {
     const { id } = useParams();
     const navigate = useNavigate();
     const [edit, setEdit] = useState({
@@ -35,6 +35,7 @@ function EditStoryPage({ token }) {
             });
 
             if (data.success) {
+                onUpdateStory(data.editStory)
                 navigate("/profile");
             }
             else {
@@ -54,7 +55,7 @@ function EditStoryPage({ token }) {
                 <form className="form-container" onSubmit={handleSubmit}>
                     <label className="title-label">
                         <span className="line">
-                            <span>Story title</span> <span>{edit.title.length}/40</span>
+                            <span>Story title</span> <span>{edit.title.length}/{titleMaxChar}</span>
                         </span>
                         <input
                             className="input-box"
@@ -73,7 +74,7 @@ function EditStoryPage({ token }) {
 
                     <label>
                         <span className="line">
-                            <span>Story summary</span> <span>{edit.summary.length}/500</span>
+                            <span>Story summary</span> <span>{edit.summary.length}/{summaryMaxChar}</span>
                         </span>
                         <textarea
                             className="input-box summary-box"

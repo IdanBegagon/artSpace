@@ -41,16 +41,25 @@ function LoginForm({ setToken, setUserName, setUserId }) {
         }
     }
 
+    function handleSignUp() {
+        navigate("/signup");
+    }
+
     return (
         <div>
-            <form onSubmit={handleLogin}>
-                <label>Email</label>
+            <form className="credentials" onSubmit={handleLogin}>
+                <h1 className="form-title">Login to your account</h1>
+                <hr />
+
                 <input className="input-box" type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
 
-                <label>Password</label>
                 <input className="input-box" type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
 
-                <button type="submit">login</button>
+                <div>
+                    <span>Don't have an account?</span> <span className="signup-no-usr" onClick={handleSignUp}>Sign Up</span>
+                </div>
+
+                <button className="submit-btn" type="submit">login</button>
             </form>
             <p>{errMessage}</p>
 

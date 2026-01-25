@@ -3,7 +3,7 @@ import "../css/Card.css"
 import { useState } from "react";
 import axios from "axios";
 
-function Card({ story, edit, view, token, handleRemoveCard, userId, onToggleFavorite }) {
+function Card({ story, edit, view, token, handleRemoveCard, userId, onToggleFavorite, closeSearch }) {
 
     //const [favorite, setFavorite] = useState(false);
     const isFavorite = story.favorites?.includes(userId);
@@ -53,7 +53,7 @@ function Card({ story, edit, view, token, handleRemoveCard, userId, onToggleFavo
 
 
     return (
-        <Link to={`/story/${story._id}`} className="card">
+        <Link to={`/story/${story._id}`} className="card" onClick={closeSearch}> 
 
 
             {edit &&

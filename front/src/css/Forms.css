@@ -39,7 +39,7 @@ hr {
     font-size: 15px;
 }
 
-.title-label{
+.title-label {
     margin-top: 40px;
 }
 
@@ -47,7 +47,7 @@ hr {
     height: 400px;
 }
 
-.summary-box{
+.summary-box {
     height: 150px;
 }
 
@@ -57,7 +57,7 @@ label {
     font-size: 20px;
 }
 
-.line{
+.line {
     display: flex;
     justify-content: space-between;
 }
@@ -70,4 +70,29 @@ label {
     background-color: #D8C9E2;
     padding: 15px;
     font-size: 15px;
+    cursor: pointer;
+}
+
+.credentials {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px;
+    gap: 10px;
+}
+.credentials button{
+    margin-top: 20px;
+    align-self: flex-end;
+}
+
+.signup-no-usr{
+    color: blue;
+    cursor: pointer;
+}
+
+.signup-no-usr:hover{
+    text-decoration: underline;
 }

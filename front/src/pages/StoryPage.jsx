@@ -4,7 +4,7 @@ import axios from "axios";
 import "../css/Story.css"
 
 
-function StoryPage() {
+function StoryPage({ token, userId, onToggleFavorite }) {
   //taking the id from the url
   const { id } = useParams();
   const [story, setStory] = useState(null);
@@ -15,11 +15,40 @@ function StoryPage() {
       .catch(error => console.log(error));
   }, [id]);
 
+  const handleFavorite = async () => {
+    if (!token) return alert("Please login to favorite stories");
+
+    try {
+      const res = await axios.post(`http://localhost:5001/api/story/toggleFavorite/${id}`, {}, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+
+      if (res.data.success) {
+        setStory({ ...story, favorites: res.data.favorites });
+        onToggleFavorite(id, res.data.favorites);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const isFavorite = story?.favorites?.includes(userId);
+
   return (
     <>
       {story && (
         <div className="story-content">
-          <h1>{story.title}</h1>
+          <div className="story-header">
+            <h1>{story.title}</h1>
+
+            <button className="favorite-btn-story" onClick={handleFavorite}>
+              <img
+                src={isFavorite ? "/favorite-icon-on.svg" : "/favorite-icon-off.svg"}
+                alt="favorite"
+              />
+            </button>
+          </div>
+
           <p className="story-author">{story.author.userName}</p>
           <p>{story.content}</p>
         </div>
