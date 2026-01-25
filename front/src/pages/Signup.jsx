@@ -36,7 +36,7 @@ function Signup({ setToken,setUserId, setUserName }) {
                 navigate("/");
             }
             else {
-                setErrMsg(data.message);
+                setErrMsg(res.data.message);
             }
         } catch (error) {
             console.log(error);
@@ -57,6 +57,7 @@ function Signup({ setToken,setUserId, setUserName }) {
                 <label className="signup-label">Username*
                 <input className="input-box" type="text" placeholder="enter username" value={data.userName} onChange={e => setData({ ...data, userName: e.target.value })} />
                 </label>
+                
 
                 <label className="signup-label">Email address*
                 <input className="input-box" type="email" placeholder="enter email" value={data.email} onChange={e => setData({ ...data, email: e.target.value })} />
@@ -70,7 +71,7 @@ function Signup({ setToken,setUserId, setUserName }) {
                     <span>Already have an account?</span> <span className="signup-no-usr" onClick={handleLogin}>Login</span>
                 </div>
 
-                <button className="submit-btn">sign up</button>
+                <button className="submit-btn" type="submit">sign up</button>
                 <p>{errMsg}</p>
             </form>
 
