@@ -54,14 +54,17 @@ function Signup({ setToken,setUserId, setUserName }) {
                 <h1 className="form-title">Create a new account</h1>
                 <hr />
 
-                <label>Username*</label>
+                <label className="signup-label">Username*
                 <input className="input-box" type="text" placeholder="enter username" value={data.userName} onChange={e => setData({ ...data, userName: e.target.value })} />
+                </label>
 
-                <label>Email address*</label>
+                <label className="signup-label">Email address*
                 <input className="input-box" type="email" placeholder="enter email" value={data.email} onChange={e => setData({ ...data, email: e.target.value })} />
+                </label>
 
-                <label>Password*</label>
+                <label className="signup-label">Password*
                 <input className="input-box" type="password" placeholder="enter password" value={data.password} onChange={e => setData({ ...data, password: e.target.value })} />
+                </label>
 
                 <div>
                     <span>Already have an account?</span> <span className="signup-no-usr" onClick={handleLogin}>Login</span>

@@ -96,3 +96,7 @@ label {
 .signup-no-usr:hover{
     text-decoration: underline;
 }
+
+.signup-label {
+    margin-top: 20px;
+}
