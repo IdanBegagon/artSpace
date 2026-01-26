@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Card from "../components/Card"
 import "../css/Home.css"
 import "../css/Profile.css"
+import api from "../api.jsx";
 
 
 function Profile({ token, userId, cards, onToggleFavorite, handleRemoveCard }) {

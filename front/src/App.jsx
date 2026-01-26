@@ -11,6 +11,7 @@ import Login from './pages/Login'
 import CreateStory from './pages/CreateStoryPage'
 import EditStoryPage from './pages/EditStoryPage'
 import Card from './components/Card'
+import api from "../api.jsx";
 
 
 function App() {
@@ -27,8 +28,8 @@ function App() {
     const savedToken = localStorage.getItem("token");
     if (savedToken) {
       setToken(savedToken);
-      axios
-        .get("http://localhost:5001/api/auth/protected", { headers: { Authorization: `Bearer ${savedToken}` } })
+      api
+        .get("/api/auth/protected", { headers: { Authorization: `Bearer ${savedToken}` } })
         .then(res => {
           if (res.data.userName) {
             setUserName(res.data.userName);
@@ -48,7 +49,7 @@ function App() {
   useEffect(() => {
     const getCards = async () => {
       try {
-        const res = await axios.get("http://localhost:5001/api/story/getAllStories")
+        const res = await api.get("/api/story/getAllStories")
         setCards(res.data);
       } catch (error) {
         console.log("Error getting cards");

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../api.jsx";
 
 function LoginForm({ setToken, setUserName, setUserId }) {
     const [email, setEmail] = useState('');
@@ -11,7 +12,7 @@ function LoginForm({ setToken, setUserName, setUserId }) {
     async function handleLogin(e) {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:5001/api/auth/login", { email, password });
+            const res = await api.post("/api/auth/login", { email, password });
 
             if (res.data.success) {
                 const newToken = res.data.token;
@@ -22,7 +23,7 @@ function LoginForm({ setToken, setUserName, setUserId }) {
                 setUserId(res.data.userId);
 
                 //getting the username on login to display as a link to the user's profile
-                const userNameRes = await axios.get("http://localhost:5001/api/auth/protected", {
+                const userNameRes = await api.get("/api/auth/protected", {
                     headers: { Authorization: `Bearer ${newToken}` }
                 });
 

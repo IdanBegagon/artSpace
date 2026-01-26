@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../css/Card.css"
 import { useState } from "react";
 import axios from "axios";
+import api from "../api.jsx";
 
 function Card({ story, edit, view, token, handleRemoveCard, userId, onToggleFavorite, closeSearch }) {
 
@@ -13,7 +14,7 @@ function Card({ story, edit, view, token, handleRemoveCard, userId, onToggleFavo
         e.stopPropagation();
 
         try {
-            const res = await axios.post(`http://localhost:5001/api/story/toggleFavorite/${story._id}`, {}, {
+            const res = await api.post(`/api/story/toggleFavorite/${story._id}`, {}, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -32,7 +33,7 @@ function Card({ story, edit, view, token, handleRemoveCard, userId, onToggleFavo
         //an alert that let the user confirm the deletion
         if (window.confirm("Are you sure you want to delete this story?")) {
             try {
-                const res = await axios.delete(`http://localhost:5001/api/story/deleteStory/${story._id}`, { headers: { Authorization: `Bearer ${token}` } });
+                const res = await api.delete(`/api/story/deleteStory/${story._id}`, { headers: { Authorization: `Bearer ${token}` } });
 
                 if (res.data.success) {
                     handleRemoveCard(story._id);

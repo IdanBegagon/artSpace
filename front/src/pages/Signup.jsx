@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "../api.jsx";
 
 function Signup({ setToken,setUserId, setUserName }) {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ function Signup({ setToken,setUserId, setUserName }) {
 
         const { userName, email, password } = data;
         try {
-            const res = await axios.post("http://localhost:5001/api/auth/signup", { userName, email, password });
+            const res = await api.post("/api/auth/signup", { userName, email, password });
 
             if (res.data.success) {
 

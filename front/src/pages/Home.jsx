@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Card from "../components/Card"
 import "../css/Home.css"
+import api from "../api.jsx";
 
 function Home({ token, userId, cards, onToggleFavorite }) {
 
