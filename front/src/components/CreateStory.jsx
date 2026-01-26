@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../css/Forms.css";
+import api from "../api.jsx";
 
 function CreateStory({ token, setCards }) {
 
@@ -18,7 +19,7 @@ function CreateStory({ token, setCards }) {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:5001/api/story/createStory", { title, content, summary, genres: selectedGenres }, { headers: { Authorization: `Bearer ${token}` } });
+            const res = await api.post("/api/story/createStory", { title, content, summary, genres: selectedGenres }, { headers: { Authorization: `Bearer ${token}` } });
             setCards(prevCards => [res.data.newStory, ...prevCards]);
             navigate("/profile");
         } catch (error) {

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "../css/Story.css"
+import api from "../api.jsx";
 
 
 function StoryPage({ token, userId, onToggleFavorite }) {
@@ -10,7 +11,7 @@ function StoryPage({ token, userId, onToggleFavorite }) {
   const [story, setStory] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:5001/api/story/getStoryById/${id}`)
+    api.get(`/api/story/getStoryById/${id}`)
       .then(res => setStory(res.data))
       .catch(error => console.log(error));
   }, [id]);
@@ -19,7 +20,7 @@ function StoryPage({ token, userId, onToggleFavorite }) {
     if (!token) return alert("Please login to favorite stories");
 
     try {
-      const res = await axios.post(`http://localhost:5001/api/story/toggleFavorite/${id}`, {}, {
+      const res = await api.post(`/api/story/toggleFavorite/${id}`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import "../css/Forms.css";
+import api from "../api.jsx";
 
 
 function EditStoryPage({ token, onUpdateStory }) {
@@ -18,7 +19,7 @@ function EditStoryPage({ token, onUpdateStory }) {
     const genresList = ["Fantasy", "Sci-Fi", "Romance", "Horror", "Mystery", "Drama", "Action", "Comedy"];
 
     useEffect(() => {
-        axios.get(`http://localhost:5001/api/story/getStoryById/${id}`)
+        api.get(`/api/story/getStoryById/${id}`)
             .then(res => {
                 setEdit({
                     title: res.data.title,
@@ -33,7 +34,7 @@ function EditStoryPage({ token, onUpdateStory }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.put(`http://localhost:5001/api/story/editStory/${id}`, edit, {
+            const { data } = await api.put(`/api/story/editStory/${id}`, edit, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { useState } from "react";
 import "../css/Navbar.css";
 import { useNavigate } from "react-router-dom";
+import api from "../api.jsx";
 
 function Navbar({ token, setToken, userName, setUserName, setUserId, search, setSearch, setIsSearching }) {
 

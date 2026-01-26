@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import CreateStory from "../components/CreateStory"
 import Protected from "../components/Protected";
+import api from "../api.jsx";
 
 function CreateStoryPage({ token, setCards }) {
     
