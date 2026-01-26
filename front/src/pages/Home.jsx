@@ -36,10 +36,9 @@ function Home({ token, userId, cards, onToggleFavorite }) {
 
      <div className="home-container">
       {genresList.map((genreName) => {
-        // Filter stories where the genre is one of the first two tags
         const topStories = cards
           .filter(story => story.genres?.slice(0, 2).includes(genreName))
-          .slice(0, 3); // Get the top 3
+          .slice(0, 3); 
 
         if (topStories.length === 0) return null;
 
