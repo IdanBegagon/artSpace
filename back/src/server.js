@@ -5,6 +5,7 @@ import { connectDB } from "./db/connectDB.js";
 //route imports
 import cardsRoutes from "./routes/cardsRoutes.js"
 import authRouter from "./routes/authRoutes.js"
+import storyRouter from "./routes/storyRoutes.js"
 
 dotenv.config();
 
@@ -18,8 +19,9 @@ app.use(cors());
 app.use(express.json());
 
 //endpoints
-app.use("/api/auth", authRouter)
+app.use("/api/auth", authRouter);
 app.use("/api/cards", cardsRoutes);
+app.use("/api/story", storyRouter);
 
 app.listen(PORT, () =>{
     console.log(`Listening on port ${PORT}`);

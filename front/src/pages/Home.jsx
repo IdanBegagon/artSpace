@@ -1,45 +1,71 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Card from "../components/Card"
 import "../css/Home.css"
-import axios from "axios"
 
+function Home({ token, userId, cards, onToggleFavorite }) {
 
-function Home() {
-  
-  const [cards, setCards] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const newestStories = cards?.slice(0, 6) || [];
+  //for the loop to be smooth
+  const displayStories = [...newestStories, ...newestStories];
+  const genresList = ["Fantasy", "Sci-Fi", "Romance", "Horror", "Mystery", "Drama", "Action", "Comedy"];
 
-  //Load once all of the cards
-  useEffect(() => {
-    const getCards = async () => {
-      try {
-        const res = await axios.get("http://localhost:5001/api/cards")
-        console.log(res.data);
-        setCards(res.data);
-      } catch (error) {
-        console.log("Error getting cards");
-      } finally{
-        setLoading(false);
-      }
-    }
-
-    getCards();
-  },[])
 
   return (
     <div className="page-container">
+      <div className="recent-releases">
+        <h1>Recent Releases</h1>
 
-      {loading && <div>Loading cards...</div>}
+        <div className="carousel-window">
 
-      {/* Presenting all summary releases */}
-      <div className="main-page-recommanded">
-        {cards.map(card => (
-          <Card card={card} key={card._id} />
-        ))}
+          <div className="carousel-track smooth-scroll">
+            {displayStories.map((card, index) => (
+              <div className="carousel-item" key={`${card._id}-${index}`}>
+                <Card
+                  story={card}
+                  token={token}
+                  userId={userId}
+                  onToggleFavorite={onToggleFavorite}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
+
+
+     <div className="home-container">
+      {genresList.map((genreName) => {
+        const topStories = cards
+          .filter(story => story.genres?.slice(0, 2).includes(genreName))
+          .slice(0, 3); 
+
+        if (topStories.length === 0) return null;
+
+        return (
+          <div key={genreName} className="genre-row-container">
+            <h2 className="genre-row-title">{genreName}</h2>
+            <div className="genre-flex-row">
+              {topStories.map(story => (
+                <div key={`${genreName}-${story._id}`} className="flex-card-wrapper">
+                  <Card 
+                    story={story} 
+                    token={token} 
+                    userId={userId} 
+                    onToggleFavorite={onToggleFavorite} 
+                  />
+                </div>
+              ))}
+            </div>
+            <hr className="hr-genre-row" />
+          </div>
+        );
+      })}
     </div>
-  )
+
+
+    </div>
+  );
 }
 
 export default Home;

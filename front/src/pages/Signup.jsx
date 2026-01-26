@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Signup() {
+function Signup({ setToken,setUserId, setUserName }) {
     const navigate = useNavigate();
 
     const [data, setData] = useState({
@@ -18,37 +18,63 @@ function Signup() {
 
         const { userName, email, password } = data;
         try {
-            const { data } = await axios.post("http://localhost:5001/api/auth/signup", { userName, email, password });
+            const res = await axios.post("http://localhost:5001/api/auth/signup", { userName, email, password });
 
-            if (data.success) {
-                setData({});
-                console.log("Registered succsessfully");
-                navigate('/');
+            if (res.data.success) {
+
+                const newToken = res.data.token;
+                const newUserId = res.data.userId;
+                localStorage.setItem("token", newToken);
+
+                setToken(newToken);
+                setUserId(newUserId);
+                setUserName(userName);
+
+
+                setToken(newToken);
+                setUserId(data.userId);
+                navigate("/");
             }
             else {
-                setErrMsg(data.message);
+                setErrMsg(res.data.message);
             }
         } catch (error) {
             console.log(error);
         }
     }
 
+    function handleLogin() {
+        navigate("/login");
+    }
+
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label>Username</label>
-                <input type="text" placeholder="enter username" value={data.userName} onChange={e => setData({ ...data, userName: e.target.value })} />
+        <div className="form-page">
+            <form className="credentials" onSubmit={handleSubmit}>
 
-                <label>Email address</label>
-                <input type="email" placeholder="enter email" value={data.email} onChange={e => setData({ ...data, email: e.target.value })} />
+                <h1 className="form-title">Create a new account</h1>
+                <hr />
 
-                <label>Password</label>
-                <input type="password" placeholder="enter password" value={data.password} onChange={e => setData({ ...data, password: e.target.value })} />
+                <label className="signup-label">Username*
+                <input className="input-box" type="text" placeholder="enter username" value={data.userName} onChange={e => setData({ ...data, userName: e.target.value })} />
+                </label>
+                
 
-                <button>sign up</button>
+                <label className="signup-label">Email address*
+                <input className="input-box" type="email" placeholder="enter email" value={data.email} onChange={e => setData({ ...data, email: e.target.value })} />
+                </label>
+
+                <label className="signup-label">Password*
+                <input className="input-box" type="password" placeholder="enter password" value={data.password} onChange={e => setData({ ...data, password: e.target.value })} />
+                </label>
+
+                <div>
+                    <span>Already have an account?</span> <span className="signup-no-usr" onClick={handleLogin}>Login</span>
+                </div>
+
+                <button className="submit-btn" type="submit">sign up</button>
+                <p>{errMsg}</p>
             </form>
 
-            <p>{errMsg}</p>
 
         </div>
     )

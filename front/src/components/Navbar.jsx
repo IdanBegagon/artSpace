@@ -1,29 +1,80 @@
 import { Link } from "react-router-dom"
-import "../css/Navbar.css"
+import { useState } from "react";
+import "../css/Navbar.css";
+import { useNavigate } from "react-router-dom";
 
-function Navbar({ token, setToken, userName, setUserName }) {
+function Navbar({ token, setToken, userName, setUserName, setUserId, search, setSearch, setIsSearching }) {
+
+    const [isCollapsed, setIsCollapsed] = useState(false)
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         localStorage.removeItem("token");
         setToken(null);
         setUserName(null);
+        setUserId(null);
+        navigate("/");
+    }
+
+    const handleCollapse = () => {
+        setIsCollapsed(!isCollapsed);
     }
 
     return (
         <nav>
             <div className="nav">
-                <Link to="/" className="link">Home</Link>
-                {/* show only if tokeen exist (indicates that there's a user logged in) */}
-                {token && <Link to="/profile" className="link">{userName}</Link>}
+                <Link to="/" className="link main-page-link">
+                    <img src="/ArtSpaceIcon.png" className="artspace-icon" alt="home page" />
+                    ArtSpace</Link>
+
+                <div className="nav-search">
+                    <input
+                        className="search-bar"
+                        type="text"
+                        placeholder="Search stories..."
+                        value={search}
+                        onFocus={() => setIsSearching(true)}
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                </div>
+
 
                 {/* show different nav links depends if user is logged in or not */}
                 {!token ? (
-                    <>
+                    <div className="log-sign">
                         <Link to="/signup" className="link">sign up</Link>
                         <Link to="/login" className="link">login</Link>
-                    </>
+                    </div>
                 ) : (
-                    <button className="link" onClick={handleLogout}>Logout</button>
+
+                    <div className="collapse">
+                        <span className="link" onClick={handleCollapse}>{userName}</span>
+
+                        <div className={`collapse-items ${isCollapsed ? "show" : ""}`}>
+                            <Link to="/profile" onClick={handleCollapse} className="link collapse-link">
+                                <img src="/profile-icon.svg" alt="" />
+                            </Link>
+                            <Link to="/createStory" onClick={handleCollapse} className="link collapse-link">
+                                <img src="/write-icon.svg" alt="" />
+                            </Link>
+                            <span
+                                className="link collapse-link"
+                                onClick={() => { handleCollapse(); handleLogout(); }}
+                            > <img src="/logout-icon.svg" alt="" />
+                            </span>
+                        </div>
+
+                        {/* {isCollapsed && (
+                            <div className="collapse-items">
+                                <Link to="/profile" onClick={handleCollapse} className="link collapse-link">Your profile</Link>
+                                <Link to="/createStory" onClick={handleCollapse} className="link collapse-link">+</Link>
+                                <span className="link collapse-link" onClick={() => { handleCollapse(); handleLogout(); }}>Logout</span>
+                            </div>
+                        )} */}
+                    </div>
+
+
+
                 )}
 
             </div>
