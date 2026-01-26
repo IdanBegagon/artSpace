@@ -46,7 +46,7 @@ function LoginForm({ setToken, setUserName, setUserId }) {
     }
 
     return (
-        <div>
+        <div className="form-page">
             <form className="credentials" onSubmit={handleLogin}>
                 <h1 className="form-title">Login to your account</h1>
                 <hr />
@@ -60,8 +60,8 @@ function LoginForm({ setToken, setUserName, setUserId }) {
                 </div>
 
                 <button className="submit-btn" type="submit">login</button>
-            </form>
             <p>{errMessage}</p>
+            </form>
 
         </div>
     )

@@ -8,6 +8,9 @@ function CreateStory({ token, setCards }) {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [summary, setSummary] = useState('');
+    const [selectedGenres, setSelectedGenres] = useState([]);
+    
+    const genres = ["Fantasy", "Sci-Fi", "Romance", "Horror", "Mystery", "Drama", "Action", "Comedy"];
     const navigate = useNavigate();
     const titleMaxChar = 40;
     const summaryMaxChar = 500;
@@ -15,13 +18,21 @@ function CreateStory({ token, setCards }) {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:5001/api/story/createStory", { title, content, summary }, { headers: { Authorization: `Bearer ${token}` } });
+            const res = await axios.post("http://localhost:5001/api/story/createStory", { title, content, summary, genres: selectedGenres }, { headers: { Authorization: `Bearer ${token}` } });
             setCards(prevCards => [res.data.newStory, ...prevCards]);
             navigate("/profile");
         } catch (error) {
             console.log(`Error creating a story: ${error}`);
         }
     }
+
+    const toggleGenre = (genre) => {
+        if (selectedGenres.includes(genre)) {
+            setSelectedGenres(selectedGenres.filter(g => g !== genre));
+        } else {
+            setSelectedGenres([...selectedGenres, genre]);
+        }
+    };
 
     return (
         <div className="form-page">
@@ -48,6 +59,19 @@ function CreateStory({ token, setCards }) {
                         </span>
                         <textarea className="input-box summary-box" type="text" maxLength={summaryMaxChar} value={summary} onChange={e => setSummary(e.target.value)} />
                     </label>
+
+                    <label>Genres</label>  
+                        <div className="genre-selection-container">
+                            {genres.map(g => (
+                                <div
+                                    key={g}
+                                    className={`genre-capsule ${selectedGenres.includes(g) ? "active" : ""}`}
+                                    onClick={() => toggleGenre(g)}
+                                >
+                                    {g}
+                                </div>
+                            ))}
+                        </div>
 
                     <button className="submit-btn" type="submit">Post story</button>
                 </form>

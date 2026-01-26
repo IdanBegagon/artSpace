@@ -3,13 +3,14 @@ import storyModel from "../models/storyModel.js";
 
 export const createStory = async (req, res) => {
     try {
-        const { title, content, summary } = req.body;
+        const { title, content, summary, genres } = req.body;
 
         //im using let because in line 18 i change this variable
         let newStory = new storyModel({
             title,
             content,
             summary,
+            genres,
             author: req.userId
         });
 
@@ -81,14 +82,14 @@ export const deleteStory = async (req, res) => {
 
 export const editStory = async (req, res) => {
     try {
-        const { title, content, summary } = req.body;
+        const { title, content, summary, genres } = req.body;
         //check if the author of the story is the one trying to edit
         const story = await storyModel.findById(req.params.id);
         if (story.author.toString() !== req.userId) {
             return res.json({ succss: false, message: "You're not allowed to edit this story!" });
         }
 
-        const editStory = await storyModel.findByIdAndUpdate(req.params.id, { title, content, summary }, { new: true }).populate('author', 'userName');
+        const editStory = await storyModel.findByIdAndUpdate(req.params.id, { title, content, summary, genres}, { new: true }).populate('author', 'userName');
         if (!editStory) return res.status(404).json({ success: false, message: "Story not found" });
 
         res.json({ success: true, editStory });

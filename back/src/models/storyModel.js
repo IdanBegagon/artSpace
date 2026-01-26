@@ -19,6 +19,10 @@ const storySchema = new mongoose.Schema({
         ref: 'user',
         required: true
     },
+
+    genres:[{
+        type: String
+    }],
     //making this an array to save multiple users on 1 story
     favorites:[{
         type: mongoose.Schema.Types.ObjectId,

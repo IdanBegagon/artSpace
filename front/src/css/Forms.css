@@ -100,3 +100,30 @@ label {
 .signup-label {
     margin-top: 20px;
 }
+
+.genre-selection-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.genre-capsule {
+    padding: 6px 18px;
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Makes the capsule shape */
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    background-color: transparent;
+}
+
+.genre-capsule:hover {
+    border-color: #333;
+}
+
+.genre-capsule.active {
+    background-color: #333;
+    color: white;
+    border-color: #333;
+}

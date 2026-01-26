@@ -10,10 +10,12 @@ function EditStoryPage({ token, onUpdateStory }) {
     const [edit, setEdit] = useState({
         title: "",
         content: "",
-        summary: ""
+        summary: "",
+        genres: []
     });
     const titleMaxChar = 40;
     const summaryMaxChar = 500;
+    const genresList = ["Fantasy", "Sci-Fi", "Romance", "Horror", "Mystery", "Drama", "Action", "Comedy"];
 
     useEffect(() => {
         axios.get(`http://localhost:5001/api/story/getStoryById/${id}`)
@@ -21,7 +23,8 @@ function EditStoryPage({ token, onUpdateStory }) {
                 setEdit({
                     title: res.data.title,
                     content: res.data.content,
-                    summary: res.data.summary
+                    summary: res.data.summary,
+                    genres: res.data.genres || []
                 });
             })
             .catch(error => console.log(`error getting the story: ${error}`));
@@ -45,6 +48,18 @@ function EditStoryPage({ token, onUpdateStory }) {
             console.log(`error editing: ${error}`);
         }
     }
+
+    const toggleGenre = (genre) => {
+        setEdit(prev => {
+            const isSelected = prev.genres.includes(genre);
+            return {
+                ...prev,
+                genres: isSelected 
+                    ? prev.genres.filter(g => g !== genre) 
+                    : [...prev.genres, genre]
+            };
+        });
+    };
 
     return (
         <div className="form-page">
@@ -78,10 +93,22 @@ function EditStoryPage({ token, onUpdateStory }) {
                         </span>
                         <textarea
                             className="input-box summary-box"
-                            
                             value={edit.summary}
-                            onChange={e => setEdit({ ...edit, title: e.target.value })} />
+                            onChange={e => setEdit({ ...edit, summary: e.target.value })} />
                     </label>
+
+                    <label>Edit Genres</label>
+                    <div className="genre-selection-container">
+                        {genresList.map(g => (
+                            <div 
+                                key={g} 
+                                className={`genre-capsule ${edit.genres?.includes(g) ? "active" : ""}`}
+                                onClick={() => toggleGenre(g)}
+                            >
+                                {g}
+                            </div>
+                        ))}
+                    </div>
 
                     <button className="submit-btn" type="submit">Update story</button>
                 </form>

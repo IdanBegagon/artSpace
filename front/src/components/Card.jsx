@@ -5,7 +5,6 @@ import axios from "axios";
 
 function Card({ story, edit, view, token, handleRemoveCard, userId, onToggleFavorite, closeSearch }) {
 
-    //const [favorite, setFavorite] = useState(false);
     const isFavorite = story.favorites?.includes(userId);
     const navigate = useNavigate();
 
@@ -53,7 +52,7 @@ function Card({ story, edit, view, token, handleRemoveCard, userId, onToggleFavo
 
 
     return (
-        <Link to={`/story/${story._id}`} className="card" onClick={closeSearch}> 
+        <Link to={`/story/${story._id}`} className="card" onClick={closeSearch}>
 
 
             {edit &&
@@ -73,6 +72,14 @@ function Card({ story, edit, view, token, handleRemoveCard, userId, onToggleFavo
             <div className="card-author">{story.author.userName}</div>
 
             <div className="summary">{story.summary}</div>
+
+            <div className="card-genres-bleeding">
+                {story.genres?.slice(0, 2).map((g, index) => (
+                    <span key={index} className="genre-pill">
+                        {g}
+                    </span>
+                ))}
+            </div>
 
 
         </Link>

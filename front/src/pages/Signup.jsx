@@ -48,7 +48,7 @@ function Signup({ setToken,setUserId, setUserName }) {
     }
 
     return (
-        <div className="page-container">
+        <div className="form-page">
             <form className="credentials" onSubmit={handleSubmit}>
 
                 <h1 className="form-title">Create a new account</h1>
