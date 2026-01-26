@@ -11,7 +11,7 @@ import Login from './pages/Login'
 import CreateStory from './pages/CreateStoryPage'
 import EditStoryPage from './pages/EditStoryPage'
 import Card from './components/Card'
-import api from "../api.jsx";
+import api from "./api"
 
 
 function App() {
