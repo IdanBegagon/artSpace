@@ -4,18 +4,10 @@ import "../css/Navbar.css";
 import { useNavigate } from "react-router-dom";
 import api from "../api.jsx";
 
-function Navbar({ token, setToken, userName, setUserName, setUserId, search, setSearch, setIsSearching, isLoadingUser }) {
+function Navbar({ token, setToken, userName, setUserName, setUserId, search, setSearch, setIsSearching, isLoadingUser, handleLogout }) {
 
     const [isCollapsed, setIsCollapsed] = useState(false)
     const navigate = useNavigate();
-
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        setToken(null);
-        setUserName(null);
-        setUserId(null);
-        navigate("/");
-    }
 
     const handleCollapse = () => {
         setIsCollapsed(!isCollapsed);
