@@ -32,9 +32,12 @@ function App() {
       api
         .get("/api/auth/protected", { headers: { Authorization: `Bearer ${savedToken}` } })
         .then(res => {
-          if (res.data.userName) {
+          if (res.data.userName || res.data.error !== "jwt expired") {
             setUserName(res.data.userName);
             setUserId(res.data.id);
+          }
+          else{
+            handleLogout();
           }
         })
         .catch((error) => {
@@ -65,6 +68,14 @@ function App() {
     }
     getCards();
   }, [])
+
+      const handleLogout = () => {
+        localStorage.removeItem("token");
+        setToken(null);
+        setUserName(null);
+        setUserId(null);
+        navigate("/");
+    }
 
   //getting the function variables from the card component (line 22)  
   const onToggleFavorite = (storyId, updatedFavorites) => {
@@ -111,7 +122,8 @@ function App() {
           search={search}
           setSearch={setSearch}
           setIsSearching={setIsSearching}
-          isLoadingUser={isLoadingUser} />
+          isLoadingUser={isLoadingUser}
+          handleLogout={handleLogout} />
       </nav>
 
       {isSearching && (
