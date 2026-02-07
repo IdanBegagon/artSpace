@@ -4,7 +4,7 @@ import "../css/Navbar.css";
 import { useNavigate } from "react-router-dom";
 import api from "../api.jsx";
 
-function Navbar({ token, setToken, userName, setUserName, setUserId, search, setSearch, setIsSearching }) {
+function Navbar({ token, setToken, userName, setUserName, setUserId, search, setSearch, setIsSearching, isLoadingUser }) {
 
     const [isCollapsed, setIsCollapsed] = useState(false)
     const navigate = useNavigate();
@@ -47,35 +47,29 @@ function Navbar({ token, setToken, userName, setUserName, setUserId, search, set
                         <Link to="/login" className="link">login</Link>
                     </div>
                 ) : (
+                    isLoadingUser ? (
+                        <span>Loading...</span>
+                    ) : (
 
-                    <div className="collapse">
-                        <span className="link" onClick={handleCollapse}>{userName}</span>
+                        <div className="collapse">
+                            <span className="link" onClick={handleCollapse}>{userName}</span>
 
-                        <div className={`collapse-items ${isCollapsed ? "show" : ""}`}>
-                            <Link to="/profile" onClick={handleCollapse} className="link collapse-link">
-                                <img src="/profile-icon.svg" alt="" />
-                            </Link>
-                            <Link to="/createStory" onClick={handleCollapse} className="link collapse-link">
-                                <img src="/write-icon.svg" alt="" />
-                            </Link>
-                            <span
-                                className="link collapse-link"
-                                onClick={() => { handleCollapse(); handleLogout(); }}
-                            > <img src="/logout-icon.svg" alt="" />
-                            </span>
+                            <div className={`collapse-items ${isCollapsed ? "show" : ""}`}>
+                                <Link to="/profile" onClick={handleCollapse} className="link collapse-link">
+                                    <img src="/profile-icon.svg" alt="" />
+                                </Link>
+                                <Link to="/createStory" onClick={handleCollapse} className="link collapse-link">
+                                    <img src="/write-icon.svg" alt="" />
+                                </Link>
+                                <span
+                                    className="link collapse-link"
+                                    onClick={() => { handleCollapse(); handleLogout(); }}
+                                > <img src="/logout-icon.svg" alt="" />
+                                </span>
+                            </div>
                         </div>
 
-                        {/* {isCollapsed && (
-                            <div className="collapse-items">
-                                <Link to="/profile" onClick={handleCollapse} className="link collapse-link">Your profile</Link>
-                                <Link to="/createStory" onClick={handleCollapse} className="link collapse-link">+</Link>
-                                <span className="link collapse-link" onClick={() => { handleCollapse(); handleLogout(); }}>Logout</span>
-                            </div>
-                        )} */}
-                    </div>
-
-
-
+                    )
                 )}
 
             </div>

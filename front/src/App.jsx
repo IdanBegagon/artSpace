@@ -22,6 +22,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [search, setSearch] = useState("");
   const [isSearching, setIsSearching] = useState(false);
+  const [isLoadingUser, setIsLoadingUser] = useState(true);
 
   useEffect(() => {
     //getting the token i saved to local storage in 
@@ -42,6 +43,11 @@ function App() {
           setToken(null);
           setUserName(null);
         })
+        .finally(() => {
+          setIsLoadingUser(false); 
+        });
+    } else {
+      setIsLoadingUser(false); 
     }
   }, []);
 
@@ -104,7 +110,8 @@ function App() {
           setUserId={setUserId}
           search={search}
           setSearch={setSearch}
-          setIsSearching={setIsSearching} />
+          setIsSearching={setIsSearching}
+          isLoadingUser={isLoadingUser} />
       </nav>
 
       {isSearching && (
